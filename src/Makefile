@@ -5,7 +5,7 @@ LIBDIR         = ${PROJECT_ROOT}/lib
 # Individual Program Modifications Should Begin Here
 
 # Program to make (binary)
-EXECUTABLE     = slclust
+EXECUTABLE     = ../slclust
 
 # Source files for Executable
 SRCS            = slcluster.cpp graph.cpp graphnode.cpp cmd_line_opts.cpp

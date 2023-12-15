@@ -60,6 +60,7 @@ install : ${EXECUTABLE}
 
 clean :
 	rm -f ${OBJS} core a.out *~ \#* ${EXECUTABLE} ${MAKEFILE}.bak
+	rm -i -f ../slclust
 
 
 ${OBJ} : ${MAKEFILE}

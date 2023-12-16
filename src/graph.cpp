@@ -108,7 +108,7 @@ Graph* Graph::applyJaccardCoeff (float coeff, int min_links_each) {
   for (unsigned int i=0; i < allNodes.size(); i++) {
     
     if (VERBOSE >= info) {
-      cerr << "\rJaccard: examining node " << (i+1)  << " of " << num_nodes << "       "; 
+        cerr << "\nJaccard: examining node " << (i+1)  << " of " << num_nodes << "       " << endl; 
     }
     
     Graphnode* g = allNodes[i];
@@ -116,12 +116,13 @@ Graph* Graph::applyJaccardCoeff (float coeff, int min_links_each) {
     // examine each pair of linked nodes
     vector<Graphnode*>& linkednodes = g->getLinkedNodes();
     int num_linked_nodes = g->numLinkedNodes();
+    
     for (unsigned int j=0; j < linkednodes.size(); j++) {
       Graphnode* linkednode = linkednodes[j];
       int num_other_linked_nodes = linkednode->numLinkedNodes();
-      if (num_linked_nodes < min_links_each 
+      if ( (min_links_each > 0 && num_linked_nodes < min_links_each) 
           ||
-          num_other_linked_nodes < min_links_each
+           (min_links_each > 0 && num_other_linked_nodes < min_links_each)
           ||
           calclinkcoeff(g, linkednode) >= coeff) {
        

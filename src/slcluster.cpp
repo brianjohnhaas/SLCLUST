@@ -140,7 +140,7 @@ void die_usage (string progname) {
   cerr << "usage: " << progname << " [opts] < file_of_pairs > clusters " << endl << endl
        << "options:" << endl
        << "\t -j <float> jaccard_coefficient " << endl
-       << "\t     --min_links_for_j <int>   if -j, then requires --min_links_for_J for both nodes before applying -j " << endl
+       << "\t     --min_links_for_J <int>   if -j, then requires --min_links_for_J for both nodes before applying -j " << endl
        << "\t -v[v] verbosity at 'info', 'debug'  " << endl
        << endl << endl ;
   

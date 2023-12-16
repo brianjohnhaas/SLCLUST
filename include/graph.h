@@ -39,7 +39,7 @@ class Graph {
     
   
   /* Apply the Jaccard Coefficient */
-  Graph* applyJaccardCoeff (float coeff);
+  Graph* applyJaccardCoeff (float coeff, int min_links_each);
 
   /* compare two nodes to get their link score (jaccard coeff) */
   float calclinkcoeff (Graphnode* a_node, Graphnode* b_node);

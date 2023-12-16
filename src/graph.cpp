@@ -98,7 +98,7 @@ void Graph::traverseGraph (Graphnode* g, vector<string>& cluster) {
 
 
  /* Apply the Jaccard Coefficient */
-Graph* Graph::applyJaccardCoeff (float coeff) {
+Graph* Graph::applyJaccardCoeff (float coeff, int min_links_each) {
   
   Graph* gph = new Graph();
   
@@ -115,10 +115,18 @@ Graph* Graph::applyJaccardCoeff (float coeff) {
     
     // examine each pair of linked nodes
     vector<Graphnode*>& linkednodes = g->getLinkedNodes();
+    int num_linked_nodes = g->numLinkedNodes();
     for (unsigned int j=0; j < linkednodes.size(); j++) {
       Graphnode* linkednode = linkednodes[j];
-      if (calclinkcoeff(g, linkednode) >= coeff) {
-        gph->addLinkedNodes(g->getNodename(), linkednode->getNodename());
+      int num_other_linked_nodes = linkednode->numLinkedNodes();
+      if (num_linked_nodes < min_links_each 
+          ||
+          num_other_linked_nodes < min_links_each
+          ||
+          calclinkcoeff(g, linkednode) >= coeff) {
+       
+          gph->addLinkedNodes(g->getNodename(), linkednode->getNodename());
+      
       }
       
     }

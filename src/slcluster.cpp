@@ -43,6 +43,8 @@ int main (int argc, char** argv) {
   // get the Jaccard coefficient if specified.
   float cutoff;
   bool want_jaccard = co_get_float(argc, argv, "-j", &cutoff);
+  int min_links_for_J = 0;
+  co_get_int(argc, argv, "--min_links_for_J", &min_links_for_J);
   
   // Begin Graph Building.
   
@@ -56,6 +58,8 @@ int main (int argc, char** argv) {
   
   int count = 0;
   
+  
+
   if (VERBOSE >= info) 
     cerr << "-reading pairs." << endl;
   
@@ -104,9 +108,9 @@ int main (int argc, char** argv) {
     /*   Getting Jaccard Clusters by removing edges below the specified coefficent */
     
     if (VERBOSE >= info) 
-      cerr << endl << endl << "Finding jaccard clusters at coeff(" << cutoff << ")" << endl;
+        cerr << endl << endl << "Finding jaccard clusters at coeff(" << cutoff << ") and min links each (" << min_links_for_J << ")" << endl;
     
-    Graph* g2 = g.applyJaccardCoeff (cutoff);
+    Graph* g2 = g.applyJaccardCoeff (cutoff, min_links_for_J);
     
     if (VERBOSE >= info)
       cerr << "Extracting clusters now." << endl;
@@ -135,7 +139,8 @@ void die_usage (string progname) {
   
   cerr << "usage: " << progname << " [opts] < file_of_pairs > clusters " << endl << endl
        << "options:" << endl
-       << "\t -j jaccard_coefficient " << endl
+       << "\t -j <float> jaccard_coefficient " << endl
+       << "\t     --min_links_for_j <int>   if -j, then requires --min_links_for_J for both nodes before applying -j " << endl
        << "\t -v[v] verbosity at 'info', 'debug'  " << endl
        << endl << endl ;
   
